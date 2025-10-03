@@ -1,5 +1,19 @@
+import { PurchaseCard } from "../components/PurchaseCard"
+
 export const PurchasesPage = () => {
     return (
-        <div>PurchasesPage</div>
+        <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start">
+            <h1 className="font-bold text-3xl">Purchases</h1>
+            <h2 className="text-gray-600 font-medium">Buy cheese products</h2>
+            {/* Grid para las cards de los productos */}
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
+                <PurchaseCard imgName="cheese-blue.jpg" />
+                <PurchaseCard imgName="cheese-brie.jpg" />
+                <PurchaseCard imgName="cheese-cheddar.jpg" />
+                <PurchaseCard imgName="cheese-gouda.jpg" />
+                <PurchaseCard imgName="cheese-mozzarella.jpg" />
+                <PurchaseCard imgName="cheese-parmesan.jpg" />
+            </div>
+        </div>
     )
 }

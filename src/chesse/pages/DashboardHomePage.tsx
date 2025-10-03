@@ -4,20 +4,20 @@ export const DashboardHomePage = () => {
     return (
         <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start">
             <h1 className="font-bold text-3xl">Dashboard</h1>
-            <h2>Overview of your cheese shop</h2>
+            <h2 className="text-gray-600 font-medium">Overview of your cheese shop</h2>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Total Revenue</h5>
-                        <CurrencyDollarIcon className="h-6 w-6 text-orange-500" />
+                        <CurrencyDollarIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">$25.00</h1>
                 </div>
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Total Sales</h5>
-                        <ShoppingCartIcon className="h-6 w-6 text-orange-500" />
+                        <ShoppingCartIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">1</h1>
                 </div>
@@ -25,7 +25,7 @@ export const DashboardHomePage = () => {
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Inventory Items
                         </h5>
-                        <InboxStackIcon className="h-6 w-6 text-orange-500" />
+                        <InboxStackIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">128</h1>
                 </div>

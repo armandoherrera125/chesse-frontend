@@ -30,7 +30,7 @@ export const ChesseHomePage = () => {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                            `${isActive ? "text-orange-500" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
+                            `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
                     >
                         <PuzzlePieceIcon className="h-6 w-6" />
@@ -40,7 +40,7 @@ export const ChesseHomePage = () => {
                     <NavLink
                         to="/inventory"
                         className={({ isActive }) =>
-                            `${isActive ? "text-orange-500" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
+                            `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
                     >
                         <InboxStackIcon className="h-6 w-6" />
@@ -50,7 +50,7 @@ export const ChesseHomePage = () => {
                     <NavLink
                         to="/purchases"
                         className={({ isActive }) =>
-                            `${isActive ? "text-orange-500" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
+                            `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
                     >
                         <ShoppingCartIcon className="h-6 w-6" />
@@ -60,7 +60,7 @@ export const ChesseHomePage = () => {
                     <NavLink
                         to="/sales"
                         className={({ isActive }) =>
-                            `${isActive ? "text-orange-500" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
+                            `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
                     >
                         <CurrencyDollarIcon className="h-6 w-6" />
