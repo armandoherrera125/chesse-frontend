@@ -44,7 +44,7 @@ export const SalesPage = () => {
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Total Revenue</h5>
-                        <CurrencyDollarIcon className="h-6 w-6 text-orange-500" />
+                        <CurrencyDollarIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">$25.00</h1>
                 </div>
@@ -53,7 +53,7 @@ export const SalesPage = () => {
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Transactions</h5>
-                        <ArrowTrendingUpIcon className="h-6 w-6 text-orange-500" />
+                        <ArrowTrendingUpIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">8</h1>
                 </div>
@@ -62,7 +62,7 @@ export const SalesPage = () => {
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
                         <h5 className="text-gray-600 font-medium">Avg. Transaction</h5>
-                        <CalendarIcon className="h-6 w-6 text-orange-500" />
+                        <CalendarIcon className="h-6 w-6 text-strongyellow" />
                     </div>
                     <h1 className="font-bold text-2xl">$97.39</h1>
                 </div>
@@ -88,7 +88,7 @@ export const SalesPage = () => {
                                 <TableCell className="font-medium">{sale.date}</TableCell>
                                 <TableCell>{sale.product}</TableCell>
                                 <TableCell>{sale.quantity}</TableCell>
-                                <TableCell className="text-right text-orange-500">{sale.total}</TableCell>
+                                <TableCell className="text-right text-strongyellow">{sale.total}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
