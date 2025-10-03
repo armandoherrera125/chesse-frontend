@@ -1,12 +1,13 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
 
 interface PurchaseCardProps {
     imgName: string;
 }
 
 export const PurchaseCard = ({ imgName }: PurchaseCardProps) => {
+    const navigate = useNavigate();
     return (
         <div className="w-full h-[600px] bg-white rounded-2xl flex flex-col overflow-hidden">
             {/* Imagen: ocupa mitad superior */}
@@ -26,13 +27,13 @@ export const PurchaseCard = ({ imgName }: PurchaseCardProps) => {
                 </div>
                 <h3 className="text-gray-600 font-medium">Hard Chesse</h3>
                 <h2 className="text-strongyellow text-2xl font-extrabold">$45.99</h2>
-                <div className="flex flex-row justify-between w-full">
-                    {/* <Button variant='productamount'>-</Button> */}
+                {/* <div className="flex flex-row justify-between w-full">
+                
                     <Button variant='productamount'>-</Button>
                     <h1 className="text-lg font-medium">1</h1>
                     <Button variant='productamount'>+</Button>
-                </div>
-                <button className="w-full flex flex-row justify-center items-center gap-5 hover:cursor-pointer rounded-md p-2 text-black bg-strongyellow">
+                </div> */}
+                <button onClick={() => navigate('/purchases/checkout')} className="mt-5 w-full flex flex-row justify-center items-center gap-5 hover:cursor-pointer rounded-md p-2 text-black bg-strongyellow">
                     <ShoppingCartIcon className="w-6 h-6 text-black" />
                     Buy $45.99
                 </button>

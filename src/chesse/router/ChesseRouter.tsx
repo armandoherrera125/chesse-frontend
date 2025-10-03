@@ -4,6 +4,7 @@ import { DashboardHomePage } from "../pages/DashboardHomePage"
 import { InventoryPage } from "../pages/InventoryPage"
 import { PurchasesPage } from "../pages/PurchasesPage"
 import { SalesPage } from "../pages/SalesPage"
+import { CheckoutPage } from "../pages/CheckoutPage"
 
 export const ChesseRouter = () => {
     return (
@@ -12,6 +13,7 @@ export const ChesseRouter = () => {
                 <Route index element={<DashboardHomePage />} />
                 <Route path="/inventory" element={<InventoryPage />} />
                 <Route path="/purchases" element={<PurchasesPage />} />
+                <Route path="/purchases/checkout" element={<CheckoutPage />} />
                 <Route path="/sales" element={<SalesPage />} />
                 <Route path="*" element={<Navigate to='/' />} />
             </Route>
