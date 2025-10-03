@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router"
 
 export const ChesseHomePage = () => {
     const [isOpen, setIsOpen] = useState(false)
-
+    console.log(isOpen)
     return (
         <div className="min-h-screen flex">
             {isOpen && (
@@ -32,6 +32,7 @@ export const ChesseHomePage = () => {
                         className={({ isActive }) =>
                             `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
+                        onClick={() => setIsOpen(false)}
                     >
                         <PuzzlePieceIcon className="h-6 w-6" />
                         Dashboard
@@ -42,6 +43,7 @@ export const ChesseHomePage = () => {
                         className={({ isActive }) =>
                             `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
+                        onClick={() => setIsOpen(false)}
                     >
                         <InboxStackIcon className="h-6 w-6" />
                         Inventory
@@ -52,6 +54,7 @@ export const ChesseHomePage = () => {
                         className={({ isActive }) =>
                             `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
+                        onClick={() => setIsOpen(false)}
                     >
                         <ShoppingCartIcon className="h-6 w-6" />
                         Purchases
@@ -62,6 +65,7 @@ export const ChesseHomePage = () => {
                         className={({ isActive }) =>
                             `${isActive ? "text-strongyellow" : "text-black"} flex gap-2 p-2 rounded-md transition-all duration-200 hover:scale-105 hover:bg-gray-50`
                         }
+                        onClick={() => setIsOpen(false)}
                     >
                         <CurrencyDollarIcon className="h-6 w-6" />
                         Sales
