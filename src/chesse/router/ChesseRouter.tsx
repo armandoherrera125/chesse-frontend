@@ -19,7 +19,7 @@ export const ChesseRouter = () => {
                 <Route path="/inventory/edit/:id" element={<EditProduct />} />
                 <Route path="/inventory/delete/:id" element={<DeleteProduct />} />
                 <Route path="/purchases" element={<PurchasesPage />} />
-                <Route path="/purchases/checkout" element={<CheckoutPage />} />
+                <Route path="/purchases/checkout/:slug" element={<CheckoutPage />} />
                 <Route path="/sales" element={<SalesPage />} />
                 <Route path="*" element={<Navigate to='/' />} />
             </Route>
