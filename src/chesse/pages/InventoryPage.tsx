@@ -1,6 +1,7 @@
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { InventoryCard } from "../components/InventoryCard"
 import { useNavigate } from "react-router"
+import { cheeses } from "@/data/CheeseList";
 
 export const InventoryPage = () => {
     const navigate = useNavigate();
@@ -28,12 +29,9 @@ export const InventoryPage = () => {
 
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
-                <InventoryCard imgName="cheese-blue.jpg" />
-                <InventoryCard imgName="cheese-brie.jpg" />
-                <InventoryCard imgName="cheese-cheddar.jpg" />
-                <InventoryCard imgName="cheese-gouda.jpg" />
-                <InventoryCard imgName="cheese-mozzarella.jpg" />
-                <InventoryCard imgName="cheese-parmesan.jpg" />
+                {
+                    cheeses.map((item) => <InventoryCard key={item.id} {...item} />)
+                }
             </div>
 
             {/* Un solo botón que cambia según el tamaño */}
