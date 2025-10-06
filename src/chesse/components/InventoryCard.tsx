@@ -1,11 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
 
 interface InventoryCardProps {
     imgName: string;
 }
 
 export const InventoryCard = ({ imgName }: InventoryCardProps) => {
+    const navigate = useNavigate();
     return (
         <div className="w-full h-[600px] bg-white rounded-2xl flex flex-col overflow-hidden">
             <div className="h-[350px] overflow-hidden">
@@ -23,11 +25,15 @@ export const InventoryCard = ({ imgName }: InventoryCardProps) => {
                 <h3 className="text-gray-600 font-medium">Hard Chesse</h3>
                 <h2 className="text-strongyellow text-2xl font-extrabold">$45.99</h2>
                 <div className="flex flex-row gap-3 w-full mt-8">
-                    <button className="w-full bg-orange-50 hover:bg-strongyellow hover:cursor-pointer rounded-md p-2 text-balck text-center flex flex-row gap-5 justify-center items-center">
+                    <button
+                        onClick={() => navigate('/inventory/edit/123')}
+                        className="w-full bg-orange-50 hover:bg-strongyellow hover:cursor-pointer rounded-md p-2 text-balck text-center flex flex-row gap-5 justify-center items-center">
                         <PencilSquareIcon className="w-6 h-6 text-black" />
                         Edit
                     </button>
-                    <button className="w-full bg-orange-50 hover:bg-strongyellow hover:cursor-pointer rounded-md p-2 text-balck text-center flex flex-row gap-5 justify-center items-center">
+                    <button
+                        onClick={() => navigate('/inventory/delete/123')}
+                        className="w-full bg-orange-50 hover:bg-strongyellow hover:cursor-pointer rounded-md p-2 text-balck text-center flex flex-row gap-5 justify-center items-center">
                         <TrashIcon className="w-6 h-6 text-black" />
                         Remove
                     </button>
