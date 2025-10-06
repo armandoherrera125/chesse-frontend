@@ -157,7 +157,9 @@ export const CheckoutPage = () => {
                         <ShoppingCartIcon className="w-6 h-6 text-black" />
                         Complete Purchase
                     </button>
-                    <button className="flex flex-row justify-center items-center gap-5 w-full rounded-md p-2 bg-orange-50 cursor-pointer">
+                    <button
+                        onClick={() => navigate('/purchases')}
+                        className="flex flex-row justify-center items-center gap-5 w-full rounded-md p-2 bg-orange-50 cursor-pointer">
                         Cancel
                     </button>
                 </div>
