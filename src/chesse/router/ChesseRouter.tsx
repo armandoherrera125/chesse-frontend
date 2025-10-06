@@ -5,6 +5,9 @@ import { InventoryPage } from "../pages/InventoryPage"
 import { PurchasesPage } from "../pages/PurchasesPage"
 import { SalesPage } from "../pages/SalesPage"
 import { CheckoutPage } from "../pages/CheckoutPage"
+import { AddProduct } from "../pages/AddProduct"
+import { EditProduct } from "../pages/EditProduct"
+import { DeleteProduct } from "../pages/DeleteProduct"
 
 export const ChesseRouter = () => {
     return (
@@ -12,6 +15,9 @@ export const ChesseRouter = () => {
             <Route path="/" element={<ChesseHomePage />}>
                 <Route index element={<DashboardHomePage />} />
                 <Route path="/inventory" element={<InventoryPage />} />
+                <Route path="/inventory/add" element={<AddProduct />} />
+                <Route path="/inventory/edit/:id" element={<EditProduct />} />
+                <Route path="/inventory/delete/:id" element={<DeleteProduct />} />
                 <Route path="/purchases" element={<PurchasesPage />} />
                 <Route path="/purchases/checkout" element={<CheckoutPage />} />
                 <Route path="/sales" element={<SalesPage />} />

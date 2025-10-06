@@ -1,7 +1,9 @@
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { InventoryCard } from "../components/InventoryCard"
+import { useNavigate } from "react-router"
 
 export const InventoryPage = () => {
+    const navigate = useNavigate();
     return (
         <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start relative">
             {/* Header */}
@@ -11,6 +13,7 @@ export const InventoryPage = () => {
                     <h2 className="text-gray-600 font-medium">Manage your cheese products</h2>
                 </div>
                 <button
+                    onClick={() => navigate('/inventory/add')}
                     className="
                     bg-strongyellow hover:opacity-90 
                     flex items-center gap-3 cursor-pointer transition-colors duration-300
