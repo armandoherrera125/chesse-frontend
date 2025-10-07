@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authSlice from '../auth/features/authSlice';
+import { productApi } from '@/chesse/services/product';
 
 export const store = configureStore({
     reducer: {
-        auth: authSlice
+        auth: authSlice,
+        [productApi.reducerPath]: productApi.reducer
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productApi.middleware),
 });
 
 
