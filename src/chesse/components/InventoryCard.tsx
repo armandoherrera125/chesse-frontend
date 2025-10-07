@@ -9,12 +9,11 @@ interface InventoryCardProps {
     price: number;
     unitsAvailable: number;
     weight: string;
-    country: string;
     image: string;
     slug: string;
 }
 
-export const InventoryCard = ({ name, type, description, price, unitsAvailable, weight, country, image, slug,
+export const InventoryCard = ({ name, type, description, price, unitsAvailable, weight, image, slug,
 }: InventoryCardProps) => {
     const navigate = useNavigate();
     return (

@@ -2,10 +2,11 @@ import { ArrowLeftIcon, CloudIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import { Upload } from 'lucide-react';
-import { cheeses } from "@/data/CheeseList";
+import { useAppSelector } from "@/auth/hooks/hooks";
 
 
 export const EditProduct = () => {
+    const { productList } = useAppSelector((state) => state.product);
     const { slug: paramSlug } = useParams();
     const [productForm, setProductForm] = useState({
         name: '',
@@ -75,7 +76,7 @@ export const EditProduct = () => {
     }
     useEffect(() => {
         if (!paramSlug) return;
-        const productFound = cheeses.find((item) => item.slug == paramSlug);
+        const productFound = productList.find((item) => item.slug == paramSlug);
         if (!productFound) {
             navigate('/inventory');
             return;

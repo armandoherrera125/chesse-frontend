@@ -9,12 +9,11 @@ interface PurchaseCardProps {
     price: number;
     unitsAvailable: number;
     weight: string;
-    country: string;
     image: string;
     slug: string;
 }
 
-export const PurchaseCard = ({ name, type, description, price, unitsAvailable, weight, country, image, slug, }: PurchaseCardProps) => {
+export const PurchaseCard = ({ name, type, description, price, unitsAvailable, weight, image, slug, }: PurchaseCardProps) => {
     const navigate = useNavigate();
     return (
         <div className="w-full h-[600px] bg-white rounded-2xl flex flex-col overflow-hidden">
