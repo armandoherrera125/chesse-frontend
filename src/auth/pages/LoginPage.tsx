@@ -5,6 +5,7 @@ import { setProducts } from "@/chesse/features/productSlice";
 import { usePostLoginMutation } from "../services/auth";
 import { useState } from "react";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useNavigate } from "react-router";
 
 export const LoginPage = () => {
     const [loginForm, setLoginForm] = useState({
@@ -18,6 +19,7 @@ export const LoginPage = () => {
             [e.target.name]: e.target.value
         });
     }
+    const navigate = useNavigate();
     const [triggerProducts] = useLazyGetProductsQuery();
     const [triggerLogin, { isError, error }] = usePostLoginMutation();
     const dispatch = useAppDispatch();
@@ -70,6 +72,10 @@ export const LoginPage = () => {
                     </div>
                 )}
                 <button onClick={handleLogin} className="text-white bg-yellow-600 w-full rounded-md shadow-md p-2 mt-7 transition-all duration-300 hover:scale-105">Sign in</button>
+                <div className="flex flex-row gap-3 mt-3 justify-center items-center">
+                    <h1 className="text-gray-500 text-lg font-thin text-center">Don't have an account?</h1>
+                    <h2 onClick={() => navigate('/auth/register')} className="cursor-pointer text-blue-600 text-lg font-thin text-center">Sign up</h2>
+                </div>
             </div>
         </div>
     )
