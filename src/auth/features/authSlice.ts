@@ -5,7 +5,6 @@ export interface AuthState {
     uid: string | null;
     email: string | null;
     displayName: string | null;
-    photoURL: string | null;
 }
 
 const initialState: AuthState = {
@@ -13,7 +12,6 @@ const initialState: AuthState = {
     uid: null,
     email: null,
     displayName: null,
-    photoURL: null,
 };
 
 
@@ -26,10 +24,9 @@ export const authSlice = createSlice({
             state.uid = action.payload.uid
             state.email = action.payload.email
             state.displayName = action.payload.displayName
-            state.photoURL = action.payload.photoURL
         },
-        logout: (state) => {
-            state = initialState;
+        logout: () => {
+            return initialState;
         }
     }
 });
