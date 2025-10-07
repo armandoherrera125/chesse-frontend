@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-    status: 'authenticated',
+    status: 'not-authenticated',
     uid: null,
     email: null,
     displayName: null,

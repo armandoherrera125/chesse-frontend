@@ -1,12 +1,13 @@
+import { useAppSelector } from "@/auth/hooks/hooks";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { cheeses } from "@/data/CheeseList";
 import { ArrowLeftIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import { toast } from "sonner";
 
 export const CheckoutPage = () => {
+    const { productList } = useAppSelector((state) => state.product);
     const { slug } = useParams();
     const navigate = useNavigate();
     const [checkoutForm, setCheckoutForm] = useState({
@@ -27,13 +28,12 @@ export const CheckoutPage = () => {
         price: 0,
         unitsAvailable: 0,
         weight: '',
-        country: '',
         image: '',
         slug: ''
     });
     const { amount, subTotal, taxPrice, total } = calculateValues;
     const { fullName, email, phoneNumber } = checkoutForm;
-    const { name, type, description, price, unitsAvailable, weight, country, image } = productInfo;
+    const { name, type, description, price, unitsAvailable, weight, image } = productInfo;
     const handleCheckoutForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCheckoutForm({
             ...checkoutForm,
@@ -47,7 +47,7 @@ export const CheckoutPage = () => {
 
     useEffect(() => {
         if (!slug) return;
-        const productData = cheeses.find((item) => item.slug == slug);
+        const productData = productList.find((item) => item.slug == slug);
         if (!productData) {
             navigate('/purchases');
             return;
@@ -60,7 +60,6 @@ export const CheckoutPage = () => {
             price: productData.price,
             unitsAvailable: productData.unitsAvailable,
             weight: productData.weight,
-            country: productData.country,
             image: productData.image,
             slug: productData.slug,
         })

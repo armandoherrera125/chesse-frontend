@@ -1,10 +1,11 @@
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { InventoryCard } from "../components/InventoryCard"
 import { useNavigate } from "react-router"
-import { cheeses } from "@/data/CheeseList";
+import { useAppSelector } from "@/auth/hooks/hooks";
 
 export const InventoryPage = () => {
     const navigate = useNavigate();
+    const { productList } = useAppSelector((state) => state.product);
     return (
         <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start relative">
             {/* Header */}
@@ -30,7 +31,7 @@ export const InventoryPage = () => {
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
                 {
-                    cheeses.map((item) => <InventoryCard key={item.id} {...item} />)
+                    productList.map((item) => <InventoryCard key={item.id} {...item} />)
                 }
             </div>
 

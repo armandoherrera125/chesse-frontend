@@ -1,4 +1,26 @@
+import { useLazyGetProductsQuery } from "@/chesse/services/product"
+import { login, type AuthState } from "../features/authSlice";
+import { useAppDispatch } from "../hooks/hooks";
+import { setProducts } from "@/chesse/features/productSlice";
+
 export const LoginPage = () => {
+    const [triggerLogin] = useLazyGetProductsQuery();
+    const dispatch = useAppDispatch();
+    const handleLogin = async () => {
+        const user: AuthState = {
+            status: 'authenticated',
+            uid: '12345',
+            email: 'armando_125@hotmail.com',
+            displayName: 'armandoherrera',
+            photoURL: 'algunaimagen',
+        };
+        dispatch(login(user));
+        const data = await triggerLogin({
+            limit: 10,
+            page: 1
+        }).unwrap();
+        dispatch(setProducts(data));
+    }
     return (
         <div className="bg-orange-50 min-h-screen flex justify-center items-center">
             <div className="bg-white md:min-w-[500px] md:min-h-[500px] rounded-md shadow-md p-8">
@@ -17,7 +39,7 @@ export const LoginPage = () => {
                         <input className="w-full p-2 bg-orange-50 rounded-md border border-orange-200 focus:border-orange-300 focus:border-2" type="password" name="password" id="password" placeholder="*******" />
                     </div>
                 </div>
-                <button className="text-white bg-yellow-600 w-full rounded-md shadow-md p-2 mt-7 transition-all duration-300 hover:scale-105">Sign in</button>
+                <button onClick={handleLogin} className="text-white bg-yellow-600 w-full rounded-md shadow-md p-2 mt-7 transition-all duration-300 hover:scale-105">Sign in</button>
             </div>
         </div>
     )
