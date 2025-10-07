@@ -34,10 +34,13 @@ export const productSlice = createSlice({
             state.count = action.payload.count;
             state.pages = action.payload.pages;
             state.productList = action.payload.productList;
+        },
+        setInitialProducts: () => {
+            return initialState;
         }
     }
 });
 
-export const { setProducts } = productSlice.actions;
+export const { setProducts, setInitialProducts } = productSlice.actions;
 
 export default productSlice.reducer;
