@@ -3,6 +3,7 @@ import authSlice from '../auth/features/authSlice';
 import { productApi } from '@/chesse/services/product';
 import { authApi } from '@/auth/services/auth';
 import productSlice from '@/chesse/features/productSlice';
+import cartSlice from '@/chesse/features/cartSlice';
 
 
 const savedAuth = localStorage.getItem('auth')
@@ -16,6 +17,7 @@ export const store = configureStore({
     reducer: {
         auth: authSlice,
         product: productSlice,
+        cart: cartSlice,
         [productApi.reducerPath]: productApi.reducer,
         [authApi.reducerPath]: authApi.reducer
     },

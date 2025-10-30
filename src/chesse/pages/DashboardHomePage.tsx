@@ -1,10 +1,20 @@
-import { BellAlertIcon, CurrencyDollarIcon, InboxStackIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
+import { BellAlertIcon, CurrencyDollarIcon, InboxStackIcon, ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
+import { useNavigate } from "react-router"
+import { CartIcon } from "../components/CartIcon";
 
 export const DashboardHomePage = () => {
+    const navigate = useNavigate();
     return (
         <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start">
-            <h1 className="font-bold text-3xl">Dashboard</h1>
-            <h2 className="text-gray-600 font-medium">Overview of your cheese shop</h2>
+            <div className="flex flex-row justify-between p-3 w-full">
+                <div className="flex flex-col gap-3">
+                    <h1 className="font-bold text-3xl">Dashboard</h1>
+                    <h2 className="text-gray-600 font-medium">Overview of your cheese shop</h2>
+                </div>
+                <div className="p-4 hidden md:block">
+                    <CartIcon />
+                </div>
+            </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">

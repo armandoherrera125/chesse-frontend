@@ -1,39 +1,31 @@
-import { useAppSelector } from "@/auth/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/auth/hooks/hooks";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeftIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router"
+import { useNavigate } from "react-router"
 import { toast } from "sonner";
+import { decrementQuantity, incrementQuantity } from "../features/cartSlice";
 
 export const CheckoutPage = () => {
-    const { productList } = useAppSelector((state) => state.product);
-    const { slug } = useParams();
+    const { cartList } = useAppSelector((state) => state.cart);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [checkoutForm, setCheckoutForm] = useState({
         fullName: '',
         email: '',
         phoneNumber: ''
     });
-    const [calculateValues, setCalculateValues] = useState({
-        amount: 1,
+
+    const [calculatePrice, setCalculatePrice] = useState({
         subTotal: 0,
-        taxPrice: 0,
+        tax: 0,
         total: 0
     });
-    const [productInfo, setProductInfo] = useState({
-        name: '',
-        type: '',
-        description: '',
-        price: 0,
-        unitsAvailable: 0,
-        weight: '',
-        image: '',
-        slug: ''
-    });
-    const { amount, subTotal, taxPrice, total } = calculateValues;
+
+    const { subTotal, tax, total } = calculatePrice;
+
     const { fullName, email, phoneNumber } = checkoutForm;
-    const { name, type, description, price, unitsAvailable, weight, image } = productInfo;
     const handleCheckoutForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCheckoutForm({
             ...checkoutForm,
@@ -46,33 +38,21 @@ export const CheckoutPage = () => {
     }
 
     useEffect(() => {
-        if (!slug) return;
-        const productData = productList.find((item) => item.slug == slug);
-        if (!productData) {
-            navigate('/purchases');
-            return;
-        }
-        setProductInfo({
-            ...productInfo,
-            name: productData.name,
-            type: productData.type,
-            description: productData.description,
-            price: productData.price,
-            unitsAvailable: productData.unitsAvailable,
-            weight: productData.weight,
-            image: productData.image,
-            slug: productData.slug,
-        })
-        const subTotal = Number((productData?.price * amount).toFixed(2));
-        const taxPrice = Number((subTotal * 0.10).toFixed(2));
-        const total = Number((subTotal + taxPrice).toFixed(2));
-        setCalculateValues({
-            ...calculateValues,
-            subTotal,
-            taxPrice,
-            total
+        let newSubTotal = 0;
+
+        cartList.forEach((item) => {
+            newSubTotal += item.price * item.quantity;
         });
-    }, [slug, amount]);
+
+        const newTax = Number((newSubTotal * 0.10).toFixed(2));
+        const newTotal = Number((newSubTotal + newTax).toFixed(2));
+
+        setCalculatePrice({
+            subTotal: Number(newSubTotal.toFixed(2)),
+            tax: newTax,
+            total: newTotal
+        });
+    }, [cartList]);
 
 
     return (
@@ -108,32 +88,32 @@ export const CheckoutPage = () => {
                 </div>
                 <div className="bg-white w-full p-5 rounded-2xl shadow flex flex-col gap-3">
                     <h1 className="text-xl md:text-2xl font-medium ">Order Summary</h1>
-                    <div className="flex flex-row gap-3">
-                        <img className="w-[125px] h-[125px] rounded-2xl" src={`/${image}`} alt="" />
-                        <div className="flex flex-col gap-3">
-                            <h1 className="font-medium text-black">{name}</h1>
-                            <h1 className="text-gray-600 font-medium">{type}</h1>
-                            <h1 className="font-bold text-strongyellow">${price}</h1>
-                        </div>
-                    </div>
-                    <Separator className=" bg-gray-300" />
-                    <h2 className="font-medium">Quantity</h2>
-                    <div className="flex flex-row justify-start gap-10 items-center">
-                        <Button
-                            disabled={amount <= 1}
-                            onClick={() => setCalculateValues({
-                                ...calculateValues,
-                                amount: amount - 1
-                            })}
-                            variant='productamount'>-</Button>
-                        <h1 className="text-lg font-medium">{amount}</h1>
-                        <Button onClick={() => setCalculateValues({
-                            ...calculateValues,
-                            amount: amount + 1
-                        })} variant='productamount'>+</Button>
-                        <h2 className="font-medium">{`(${unitsAvailable} available)`}</h2>
-                    </div>
-                    <Separator className=" bg-gray-300" />
+                    {
+                        cartList.map((item) =>
+                            <>
+                                <div className="flex flex-row justify-between">
+                                    <div className="flex flex-row gap-3">
+
+                                        <img className="w-[125px] h-[125px] rounded-2xl" src={`/${item.image}`} alt="" />
+                                        <div className="flex flex-col gap-3">
+                                            <h1 className="font-medium text-black">{item.name}</h1>
+                                            <h1 className="text-gray-600 font-medium">{item.type}</h1>
+                                            <h1 className="font-bold text-strongyellow">${item.price}</h1>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-row justify-start gap-3 md:gap-10 items-center">
+                                        <Button
+                                            disabled={item.quantity <= 1}
+                                            onClick={() => dispatch(decrementQuantity(item.slug))}
+                                            variant='productamount'>-</Button>
+                                        <h1 className="text-lg font-medium">{item.quantity}</h1>
+                                        <Button onClick={() => dispatch(incrementQuantity(item.slug))} variant='productamount'>+</Button>
+                                    </div>
+                                </div>
+                                <Separator className=" bg-gray-300" />
+                            </>
+                        )
+                    }
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-row justify-between">
                             <h2 className="font-medium">Subtotal</h2>
@@ -141,7 +121,7 @@ export const CheckoutPage = () => {
                         </div>
                         <div className="flex flex-row justify-between">
                             <h2 className="font-medium">Tax (10%)</h2>
-                            <h2 className="font-medium">${taxPrice}</h2>
+                            <h2 className="font-medium">${tax}</h2>
                         </div>
                     </div>
                     <Separator className=" bg-gray-300" />

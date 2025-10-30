@@ -1,6 +1,9 @@
+import { useAppDispatch } from "@/auth/hooks/hooks";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
+import { addToCart, type itemCart } from "../features/cartSlice";
+import { toast } from "sonner";
 
 interface PurchaseCardProps {
     name: string;
@@ -15,6 +18,19 @@ interface PurchaseCardProps {
 
 export const PurchaseCard = ({ name, type, description, price, unitsAvailable, weight, image, slug, }: PurchaseCardProps) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const handleAddProductToCart = () => {
+        const product: itemCart = {
+            slug,
+            name,
+            price,
+            quantity: 1,
+            image,
+            type
+        }
+        dispatch(addToCart(product));
+        toast.success(`Product ${name} added to the bag`)
+    }
     return (
         <div className="w-full h-[600px] bg-white rounded-2xl flex flex-col overflow-hidden">
             {/* Imagen: ocupa mitad superior */}
@@ -40,9 +56,9 @@ export const PurchaseCard = ({ name, type, description, price, unitsAvailable, w
                 </div>
                 <h3 className="text-gray-600 font-medium">{type}</h3>
                 <h2 className="text-strongyellow text-2xl font-extrabold">${price}</h2>
-                <button onClick={() => navigate(`/purchases/checkout/${slug}`)} className="mt-5 w-full flex flex-row justify-center items-center gap-5 hover:cursor-pointer rounded-md p-2 text-black bg-strongyellow">
-                    <ShoppingCartIcon className="w-6 h-6 text-black" />
-                    Buy ${price}
+                <button onClick={handleAddProductToCart} className="mt-5 w-full flex flex-row justify-center items-center gap-5 hover:cursor-pointer rounded-md p-2 text-black bg-strongyellow">
+                    <ShoppingBagIcon className="w-6 h-6 text-black" />
+                    Add to Cart
                 </button>
             </div>
         </div>

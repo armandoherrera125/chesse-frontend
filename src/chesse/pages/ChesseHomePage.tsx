@@ -5,12 +5,14 @@ import {
     EqualsIcon,
     ShoppingCartIcon,
     PuzzlePieceIcon,
-    ArrowRightStartOnRectangleIcon
+    ArrowRightStartOnRectangleIcon,
+    ShoppingBagIcon
 } from "@heroicons/react/24/outline"
 import { NavLink, Outlet, useNavigate } from "react-router"
 import { useAppDispatch } from "@/auth/hooks/hooks"
 import { logout } from "@/auth/features/authSlice"
 import { setInitialProducts } from "../features/productSlice"
+import { CartIcon } from "../components/CartIcon"
 
 export const ChesseHomePage = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -111,11 +113,14 @@ export const ChesseHomePage = () => {
 
             {/* Main content */}
             <div className="flex-1 bg-orange-50 min-h-screen">
-                <div className="p-4 md:hidden flex items-center gap-2 border-b border-gray-200">
-                    <button onClick={() => setIsOpen(true)}>
-                        <EqualsIcon className="h-8 w-8 text-gray-700" />
-                    </button>
-                    <h1 className="text-lg font-semibold">🧀 CheeseFlow</h1>
+                <div className="md:hidden flex justify-between items-center border-b border-gray-200">
+                    <div className="flex p-4 items-center gap-2 ">
+                        <button onClick={() => setIsOpen(true)}>
+                            <EqualsIcon className="h-8 w-8 text-gray-700" />
+                        </button>
+                        <h1 className="text-lg font-semibold">🧀 CheeseFlow</h1>
+                    </div>
+                    <CartIcon />
                 </div>
                 <div className="p-4">
                     <Outlet />
