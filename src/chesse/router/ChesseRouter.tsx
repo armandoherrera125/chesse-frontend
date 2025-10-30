@@ -8,6 +8,7 @@ import { CheckoutPage } from "../pages/CheckoutPage"
 import { AddProduct } from "../pages/AddProduct"
 import { EditProduct } from "../pages/EditProduct"
 import { DeleteProduct } from "../pages/DeleteProduct"
+import { CartPage } from "../pages/CartPage"
 
 export const ChesseRouter = () => {
     return (
@@ -19,8 +20,9 @@ export const ChesseRouter = () => {
                 <Route path="/inventory/edit/:slug" element={<EditProduct />} />
                 <Route path="/inventory/delete/:slug" element={<DeleteProduct />} />
                 <Route path="/purchases" element={<PurchasesPage />} />
-                <Route path="/purchases/checkout/:slug" element={<CheckoutPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/sales" element={<SalesPage />} />
+                <Route path="/cart" element={<CartPage />} />
                 <Route path="*" element={<Navigate to='/' />} />
             </Route>
         </Routes>

@@ -1,5 +1,8 @@
+import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { ArrowTrendingUpIcon, CalendarIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
+import { ArrowTrendingUpIcon, CalendarIcon, CurrencyDollarIcon, ShoppingBagIcon } from "@heroicons/react/24/outline"
+import { useNavigate } from "react-router";
+import { CartIcon } from "../components/CartIcon";
 
 
 const salesData = [
@@ -36,10 +39,23 @@ const salesData = [
 
 
 export const SalesPage = () => {
+    const navigate = useNavigate();
     return (
         <div className="flex flex-col gap-5 md:mt-10 justify-center items-center md:justify-start md:items-start">
-            <h1 className="font-bold text-3xl">Sales</h1>
-            <h2>Track your sales performance</h2>
+
+            <div className="flex flex-row justify-between p-3 w-full">
+                <div className="flex flex-col gap-3">
+                    <h1 className="font-bold text-3xl">Sales</h1>
+                    <h2 className="text-gray-600 font-medium">Track your sales performance</h2>
+                </div>
+                <div className="p-4 hidden md:block">
+                    <CartIcon />
+                </div>
+            </div>
+
+            <Separator className="my-4 w-full border border-gray-300" />
+
+
             <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-3">
                 <div className="bg-white w-full min-h-[200px] rounded-md shadow-md overflow-hidden p-5 flex flex-col gap-4">
                     <div className="flex flex-row justify-between items-center w-full">
