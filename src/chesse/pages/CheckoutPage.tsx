@@ -5,10 +5,14 @@ import { ArrowLeftIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
 import { toast } from "sonner";
-import { decrementQuantity, incrementQuantity } from "../features/cartSlice";
+import { decrementQuantity, incrementQuantity, resetCard } from "../features/cartSlice";
+import { usePostSalesMutation } from "../services/sale";
 
 export const CheckoutPage = () => {
     const { cartList } = useAppSelector((state) => state.cart);
+    const { uid } = useAppSelector((state) => state.auth);
+    const [triggerSaleRequest] = usePostSalesMutation();
+    console.log(cartList)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [checkoutForm, setCheckoutForm] = useState({
@@ -32,9 +36,35 @@ export const CheckoutPage = () => {
             [e.target.name]: e.target.value
         });
     }
-    const handlePurchase = () => {
-        navigate('/purchases');
-        toast.success('Purchase completed');
+    const handlePurchase = async () => {
+        try {
+            const result = await triggerSaleRequest({
+                sales: cartList.map((item) => {
+                    console.log(typeof item.quantity)
+                    console.log(typeof item.price)
+                    const quantity = Number(item.quantity);
+                    const price = Number(item.price);
+                    console.log(quantity, price)
+                    const total = parseFloat((price * quantity).toFixed(2));
+                    return {
+                        quantity,
+                        total,
+                        userId: uid,
+                        productId: item.id
+                    };
+                })
+            }).unwrap();
+            console.log(result)
+            dispatch(resetCard());
+            navigate('/purchases');
+            toast.success('Purchase completed');
+        } catch (error) {
+            console.log(error)
+            toast.error('Purchase failed');
+            navigate('/purchases');
+        }
+        //TODO: aqui tengo que hacer la peticion al backend para que la compra se guarde
+        //TODO: y tengo que darle el formato que el back espera
     }
 
     useEffect(() => {
@@ -90,7 +120,7 @@ export const CheckoutPage = () => {
                     <h1 className="text-xl md:text-2xl font-medium ">Order Summary</h1>
                     {
                         cartList.map((item) =>
-                            <>
+                            <div key={item.slug}>
                                 <div className="flex flex-row justify-between">
                                     <div className="flex flex-row gap-3">
 
@@ -110,8 +140,8 @@ export const CheckoutPage = () => {
                                         <Button onClick={() => dispatch(incrementQuantity(item.slug))} variant='productamount'>+</Button>
                                     </div>
                                 </div>
-                                <Separator className=" bg-gray-300" />
-                            </>
+                                <Separator className=" bg-gray-300 mt-3" />
+                            </div>
                         )
                     }
                     <div className="flex flex-col gap-3">
