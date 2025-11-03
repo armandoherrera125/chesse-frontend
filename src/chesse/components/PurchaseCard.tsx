@@ -14,13 +14,15 @@ interface PurchaseCardProps {
     weight: string;
     image: string;
     slug: string;
+    id: string;
 }
 
-export const PurchaseCard = ({ name, type, description, price, unitsAvailable, weight, image, slug, }: PurchaseCardProps) => {
+export const PurchaseCard = ({ id, name, type, description, price, unitsAvailable, weight, image, slug, }: PurchaseCardProps) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const handleAddProductToCart = () => {
         const product: itemCart = {
+            id,
             slug,
             name,
             price,
