@@ -5,6 +5,7 @@ import { authApi } from '@/auth/services/auth';
 import { saleApi } from '@/chesse/services/sale';
 import productSlice from '@/chesse/features/productSlice';
 import cartSlice from '@/chesse/features/cartSlice';
+import { dashboardApi } from '@/chesse/services/dashboard';
 
 
 const savedAuth = localStorage.getItem('auth')
@@ -21,13 +22,14 @@ export const store = configureStore({
         cart: cartSlice,
         [productApi.reducerPath]: productApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
-        [saleApi.reducerPath]: saleApi.reducer
+        [saleApi.reducerPath]: saleApi.reducer,
+        [dashboardApi.reducerPath]: dashboardApi.reducer
     },
     preloadedState: {
         auth: savedAuth,
         product: savedProduct
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productApi.middleware).concat(authApi.middleware).concat(saleApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productApi.middleware).concat(authApi.middleware).concat(saleApi.middleware).concat(dashboardApi.middleware),
 });
 
 
